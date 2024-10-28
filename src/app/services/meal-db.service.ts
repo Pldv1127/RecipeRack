@@ -1,4 +1,4 @@
-// src/app/services/meal-db-api.service.ts
+// src/app/services/meal-db.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
