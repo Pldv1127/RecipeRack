@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { EdamamApiService } from './services/edamam-api.service';
 import { ApiNinjasService } from './services/api-ninjas.service';
+import { MealDbApiService } from './services/meal-db.service';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private edamamService: EdamamApiService,
-    private apiNinjasService: ApiNinjasService
+    private apiNinjasService: ApiNinjasService,
+    private mealDbService: MealDbApiService
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +48,8 @@ export class AppComponent implements OnInit {
   searchRecipes() {
     this.recipes = []; // Reset recipes list
     this.searchEdamam();
-    //this.searchSerpApi();
     this.searchApiNinjas();
+    this.searchMealDb();
   }
 
   searchEdamam() {
@@ -68,6 +70,19 @@ export class AppComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching recipes from API Ninjas:', error);
+      }
+    );
+  }
+
+  searchMealDb() {
+    this.mealDbService.searchMeals(this.searchQuery).subscribe(
+      (data) => {
+        if (data.meals) {
+          this.recipes = this.recipes.concat(data.meals);
+        }
+      },
+      (error) => {
+        console.error('Error fetching recipes from TheMealDB:', error);
       }
     );
   }
