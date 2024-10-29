@@ -9,6 +9,7 @@ import { EdamamApiService } from './services/edamam-api.service';
 import { ApiNinjasService } from './services/api-ninjas.service';
 import { MealDbApiService } from './services/meal-db.service';
 import { SpoonacularApiService } from './services/spoonacular.service';
+import { TastyApiService } from './services/tasty-api.service';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -30,7 +31,9 @@ export class AppComponent implements OnInit {
     private edamamService: EdamamApiService,
     private apiNinjasService: ApiNinjasService,
     private mealDbService: MealDbApiService,
-    private spoonacularService: SpoonacularApiService
+    private spoonacularService: SpoonacularApiService,
+    private tastyService: TastyApiService
+
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class AppComponent implements OnInit {
     this.searchApiNinjas();
     this.searchMealDb();
     this.searchSpoonacular();
+    this.searchTasty();
   }
 
   searchEdamam() {
@@ -99,6 +103,19 @@ export class AppComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching recipes from Spoonacular:', error);
+      }
+    );
+  }
+
+  searchTasty() {
+    this.tastyService.searchRecipes(this.searchQuery).subscribe(
+      (data) => {
+        if (data.results) {
+          this.recipes = this.recipes.concat(data.results);
+        }
+      },
+      (error) => {
+        console.error('Error fetching recipes from Tasty:', error);
       }
     );
   }

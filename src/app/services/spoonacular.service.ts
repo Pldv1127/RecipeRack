@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SpoonacularApiService {
   private baseUrl: string = 'https://api.spoonacular.com/recipes/complexSearch';
-  private apiKey: string = '9d1f415592d6409996c5893f1274fadf'; // Replace with your actual API key
+  private apiKey: string = '9d1f415592d6409996c5893f1274fadf'; 
 
   constructor(private http: HttpClient) {}
 
