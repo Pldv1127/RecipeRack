@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class TastyApiService {
   private baseUrl: string = 'https://tasty.p.rapidapi.com/recipes/list';
   
-  // Replace with your actual RapidAPI key
   private headers = new HttpHeaders({
     'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
     'X-RapidAPI-Key': ' 6f4cfec88bmsh0c161e9d91392abp18628ajsnffe77168258a' 

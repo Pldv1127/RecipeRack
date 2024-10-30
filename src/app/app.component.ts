@@ -16,8 +16,8 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink, CommonModule, FormsModule],
-  templateUrl: './app.component.html',  // Use external HTML template
-  styleUrls: ['./app.component.css']
+  templateUrl: './app-workbench.component.html',  // Use external HTML template
+  styleUrls: ['./app-workbench.component.css']
 })
 export class AppComponent implements OnInit {
 
@@ -52,10 +52,10 @@ export class AppComponent implements OnInit {
 
   searchRecipes() {
     this.recipes = []; // Reset recipes list
-    this.searchEdamam();
-    this.searchApiNinjas();
-    this.searchMealDb();
-    this.searchSpoonacular();
+    //this.searchEdamam();
+    //this.searchApiNinjas();
+    //this.searchMealDb();
+    //this.searchSpoonacular();
     this.searchTasty();
   }
 
