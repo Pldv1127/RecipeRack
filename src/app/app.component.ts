@@ -16,8 +16,8 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink, CommonModule, FormsModule],
-  templateUrl: './app-workbench.component.html',  // Use external HTML template
-  styleUrls: ['./app-workbench.component.css']
+  templateUrl: './app.component.html',  // Use external HTML template
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 

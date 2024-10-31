@@ -1,35 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeRack</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./app.component.css">
+</head>
+<body>
+    <nav class="navbar has-shadow">
+        <div class="navbar-brand">
+            <!-- Logo -->
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="./assets/RecipeRack_Logo_Light.png" alt="RecipeRack logo" style="max-height: 80px">
+            </a>
+        </div>
 
-<h1>Recipe Search</h1>
-<input [(ngModel)]="searchQuery" placeholder="Enter a recipe">
-<button (click)="searchRecipes()">Search</button>
-<button (click)="openOverlay()">Open Overlay</button>
-<div *ngIf="recipes.length > 0">
-<h2>Results:</h2>
-<ul>
-<li *ngFor="let recipe of recipes">
-{{ recipe.label || recipe.title || recipe.name || recipe.strMeal || recipe.recipeName }}
-</li>
-</ul>
-</div>
-<div class="overlay" *ngIf="overlayOpen">
-<div class="overlay-content">
-<h2>Overlay Window</h2>
-<p>This is an overlay window.</p>
-<button (click)="closeOverlay()">Close</button>
-</div>
-</div>
+        <!-- Search Bar -->
+        <div class="navbar-item search-bar">
+            <input [(ngModel)]="searchQuery" placeholder="Enter a recipe or ingredient" class="input custom-search-input">
+            <div class="control">
+                <button (click)="searchRecipes()" class="button custom-search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
 
-@if (authService.currentUser() === null) {
-  <div>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
-  </div>
-  } @if (authService.currentUser()) {
-  <div>
-    {{ authService.currentUser()?.username }}
-    <span (click)="logout()">Logout</span>
-  </div>
-  }
+        <!-- Right Side of NavBar -->
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-end">
+                <!-- Login Item -->
+                <a class="navbar-item">
+                    <figure class="image is-24x24 is-align-self-center" id="mini-profile-photo">
+                        <img class="is-rounded" src="https://bulma.io/assets/images/placeholders/24x24.png" />
+                    </figure>
+                    Login
+                </a>
 
+                <!-- Separation Line -->
+                <a class="navbar-line is-align-self-center" style="color: gray">|</a>
 
-<router-outlet></router-outlet>
+                <!-- Menu Item -->
+                <a class="navbar-item">
+                    <i class="fas fa-bars"></i>
+                    Menu
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results -->
+    <div class="container mt-5">
+        <div *ngIf="recipes.length > 0">
+            <h2 class="title">Results:</h2>
+            <ul>
+                <li *ngFor="let recipe of recipes">
+                    {{ recipe.label || recipe.title || recipe.name || recipe.strMeal || recipe.recipeName }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
