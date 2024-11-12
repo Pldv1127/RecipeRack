@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 
 import { EdamamApiService } from './services/edamam-api.service';
 import { ApiNinjasService } from './services/api-ninjas.service';
+import { MealDbApiService } from './services/meal-db.service';
+import { SpoonacularApiService } from './services/spoonacular.service';
+import { TastyApiService } from './services/tasty-api.service';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -26,7 +29,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private edamamService: EdamamApiService,
-    private apiNinjasService: ApiNinjasService
+    private apiNinjasService: ApiNinjasService,
+    private mealDbService: MealDbApiService,
+    private spoonacularService: SpoonacularApiService,
+    private tastyService: TastyApiService
+
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +52,11 @@ export class AppComponent implements OnInit {
 
   searchRecipes() {
     this.recipes = []; // Reset recipes list
-    this.searchEdamam();
-    //this.searchSerpApi();
-    this.searchApiNinjas();
+    //this.searchEdamam();
+    //this.searchApiNinjas();
+    //this.searchMealDb();
+    //this.searchSpoonacular();
+    this.searchTasty();
   }
 
   searchEdamam() {
@@ -68,6 +77,45 @@ export class AppComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching recipes from API Ninjas:', error);
+      }
+    );
+  }
+
+  searchMealDb() {
+    this.mealDbService.searchMeals(this.searchQuery).subscribe(
+      (data) => {
+        if (data.meals) {
+          this.recipes = this.recipes.concat(data.meals);
+        }
+      },
+      (error) => {
+        console.error('Error fetching recipes from TheMealDB:', error);
+      }
+    );
+  }
+
+  searchSpoonacular() {
+    this.spoonacularService.searchRecipes(this.searchQuery).subscribe(
+      (data) => {
+        if (data.results) {
+          this.recipes = this.recipes.concat(data.results);
+        }
+      },
+      (error) => {
+        console.error('Error fetching recipes from Spoonacular:', error);
+      }
+    );
+  }
+
+  searchTasty() {
+    this.tastyService.searchRecipes(this.searchQuery).subscribe(
+      (data) => {
+        if (data.results) {
+          this.recipes = this.recipes.concat(data.results);
+        }
+      },
+      (error) => {
+        console.error('Error fetching recipes from Tasty:', error);
       }
     );
   }
